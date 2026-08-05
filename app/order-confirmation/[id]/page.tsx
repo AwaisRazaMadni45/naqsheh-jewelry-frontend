@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { CheckCircle } from 'lucide-react'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL
+const API_URL = '/api'
 
 export default function OrderConfirmationPage({ params }: { params: { id: string } }) {
   const [order, setOrder] = useState<any>(null)

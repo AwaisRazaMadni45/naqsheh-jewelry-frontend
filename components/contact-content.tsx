@@ -63,7 +63,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: Phone, title: 'Call Us', content: '+92 336 5125119', sub: '' },
+              { icon: Phone, title: 'Call Us', content: '+92 315 7726839', sub: '' },
               { icon: Mail, title: 'Email Us', content: 'awaisrazamadni67@gmail.com', sub: 'We reply within 24 hours' },
               { icon: MapPin, title: 'Visit Us', content: 'Plot no 5 Rawalpindi, Pakistan', sub: 'By appointment only' },
               { icon: Clock, title: 'Hours', content: '24/7', sub: '' },
@@ -194,8 +194,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               </div>
               <div className="aspect-[4/3] rounded-lg overflow-hidden border border-border">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2!2d-73.9784!3d40.7589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ1JzMyLjAiTiA3M8KwNTgnNDIuMiJX!5e0!3m2!1sen!2sus!4v1600000000000!5m2!1sen!2sus"
-                  width="100%"
+ src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3321.90591365008!2d73.10351477057047!3d33.633681457319895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfeb249b8e4097%3A0xccd0c6b886c278be!2sOmar%20St%2C%20Professors'%20Colony%20Professors%20Colony%20Shakrial%2C%20Rawalpindi%2C%2046000%2C%20Pakistan!5e0!3m2!1sen!2s!4v1785902777600!5m2!1sen!2s"                  width="100%"
                   height="100%"
                   style={{ border: 0, filter: 'grayscale(1) contrast(1.1)' }}
                   allowFullScreen

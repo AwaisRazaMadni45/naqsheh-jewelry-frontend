@@ -1,7 +1,10 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL
+const API_URL = '/api'
 
-export async function getAllProducts() {
-  const res = await fetch(`${API_URL}/products?limit=1000`, { cache: 'no-store' })
+export async function getAllProducts(search?: string) {
+  const url = search
+    ? `${API_URL}/products?search=${encodeURIComponent(search)}&limit=1000`
+    : `${API_URL}/products?limit=1000`
+  const res = await fetch(url, { cache: 'no-store' })
   const data = await res.json()
   return data.products
 }
@@ -11,11 +14,13 @@ export async function getProductById(id: string) {
   const data = await res.json()
   return data.product
 }
+
 export async function getBestSellers() {
   const res = await fetch(`${API_URL}/products/best-sellers`, { cache: 'no-store' })
   const data = await res.json()
   return data.products
 }
+
 export async function getAdminStats(token: string) {
   const res = await fetch(`${API_URL}/admin/stats`, {
     headers: { Authorization: `Bearer ${token}` },
@@ -37,6 +42,7 @@ export async function updateOrderStatus(orderId: string, status: string) {
   })
   return res.json()
 }
+
 export async function submitContactForm(data: { name: string; email: string; subject: string; message: string }) {
   const res = await fetch(`${API_URL}/contact`, {
     method: 'POST',
@@ -45,11 +51,13 @@ export async function submitContactForm(data: { name: string; email: string; sub
   })
   return res.json()
 }
+
 export async function getAllContactMessages() {
   const res = await fetch(`${API_URL}/contact`, { cache: 'no-store' })
   const data = await res.json()
   return data.contacts
 }
+
 export async function subscribeToNewsletter(email: string) {
   const res = await fetch(`${API_URL}/newsletter`, {
     method: 'POST',
@@ -58,6 +66,7 @@ export async function subscribeToNewsletter(email: string) {
   })
   return res.json()
 }
+
 export async function getAllSubscribers() {
   const res = await fetch(`${API_URL}/newsletter`, { cache: 'no-store' })
   const data = await res.json()

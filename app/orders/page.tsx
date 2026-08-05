@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '@/components/auth-context'
 import { useRouter } from 'next/navigation'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL
+const API_URL = '/api'
 
 export default function OrdersPage() {
   const { user, isLoading } = useAuth()

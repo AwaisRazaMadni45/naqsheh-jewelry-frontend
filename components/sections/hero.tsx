@@ -10,10 +10,10 @@ export function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1920&h=1080&fit=crop&q=80"
-          alt="Luxury jewelry"
-          className="w-full h-full object-cover"
-        />
+  src="/images/naqsheh-logo.jpeg"
+  alt="Naqsheh"
+  className="w-full h-full object-cover"
+/>
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
       </div>
@@ -50,8 +50,7 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-base sm:text-lg text-white/70 mb-10 max-w-lg leading-relaxed"
           >
-            Discover our curated collection of handcrafted fine jewelry, designed with passion and precision for the discerning woman.
-          </motion.p>
+Handcrafted fine jewelry, designed for the discerning woman.          </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}

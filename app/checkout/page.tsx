@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useCart } from '@/components/cart-context'
 import { useAuth } from '@/components/auth-context'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL
+const API_URL = '/api'
 
 export default function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCart()
@@ -119,22 +119,25 @@ export default function CheckoutPage() {
           </div>
 
           <div>
-            <label className="text-sm font-medium mb-2 block">Payment Method</label>
-            <div className="space-y-2">
-              {['COD', 'JazzCash', 'EasyPaisa', 'Card'].map((method) => (
-                <label key={method} className="flex items-center gap-3 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="payment"
-                    checked={paymentMethod === method}
-                    onChange={() => setPaymentMethod(method)}
-                    className="accent-gold h-4 w-4"
-                  />
-                  <span className="text-sm">{method === 'COD' ? 'Cash on Delivery' : method}</span>
-                </label>
-              ))}
-            </div>
-          </div>
+  <label className="text-sm font-medium mb-2 block">Payment Method</label>
+  <div className="space-y-2">
+    {['COD'].map((method) => (
+      <label key={method} className="flex items-center gap-3 cursor-pointer">
+        <input
+          type="radio"
+          name="payment"
+          checked={paymentMethod === method}
+          onChange={() => setPaymentMethod(method)}
+          className="accent-gold h-4 w-4"
+        />
+        <span className="text-sm">{method === 'COD' ? 'Cash on Delivery' : method}</span>
+      </label>
+    ))}
+  </div>
+  {/* Baaki payment methods filhal comment out hain, jab JazzCash/EasyPaisa/Card ready ho jayen tab yahan wapis add kar dena:
+  {['COD', 'JazzCash', 'EasyPaisa', 'Card'].map((method) => (...))}
+  */}
+</div>
 
           <button
             type="submit"
