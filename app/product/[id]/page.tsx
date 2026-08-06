@@ -1,26 +1,53 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { useParams, notFound } from 'next/navigation'
 import { ProductDetail } from '@/components/product-detail'
-import { notFound } from 'next/navigation'
+import { getProductById, getAllProducts } from '@/lib/api'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL
+export default function ProductPage() {
+  const params = useParams()
+  const id = params.id as string
 
-async function getProduct(id: string) {
-  const res = await fetch(`${API_URL}/products/${id}`, { cache: 'no-store' })
-  if (!res.ok) return null
-  const data = await res.json()
-  return data.product
-}
+  const [product, setProduct] = useState<any>(null)
+  const [relatedProducts, setRelatedProducts] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [notFoundFlag, setNotFoundFlag] = useState(false)
 
-async function getRelated(category: string, excludeId: string) {
-  const res = await fetch(`${API_URL}/products?category=${encodeURIComponent(category)}&limit=8`, { cache: 'no-store' })
-  const data = await res.json()
-  return (data.products || []).filter((p: any) => p._id !== excludeId).slice(0, 4)
-}
+  useEffect(() => {
+    getProductById(id)
+      .then(async (data) => {
+        if (!data) {
+          setNotFoundFlag(true)
+          setLoading(false)
+          return
+        }
+        setProduct(data)
 
-export default async function ProductPage({ params }: { params: { id: string } }) {
-  const product = await getProduct(params.id)
-  if (!product) notFound()
+        const allProducts = await getAllProducts()
+        const related = (Array.isArray(allProducts) ? allProducts : [])
+          .filter((p: any) => p.category === data.category && p._id !== data._id)
+          .slice(0, 4)
+        setRelatedProducts(related)
+        setLoading(false)
+      })
+      .catch(() => {
+        setNotFoundFlag(true)
+        setLoading(false)
+      })
+  }, [id])
 
-  const relatedProducts = await getRelated(product.category, product._id)
+  if (loading) {
+    return (
+      <div className="min-h-screen pt-32 text-center">
+        <p className="text-muted-foreground">Loading...</p>
+      </div>
+    )
+  }
+
+  if (notFoundFlag || !product) {
+    notFound()
+  }
 
   return <ProductDetail product={product} relatedProducts={relatedProducts} />
 }
