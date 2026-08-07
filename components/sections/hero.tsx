@@ -9,10 +9,10 @@ export function HeroSection() {
     <section className="relative h-screen min-h-[600px] flex items-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img
+  <img
   src="/images/naqsheh-logo.jpeg"
   alt="Naqsheh"
-  className="w-full h-full object-cover"
+  className="w-full h-full object-contain md:object-cover bg-[#f5ede0]"
 />
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />

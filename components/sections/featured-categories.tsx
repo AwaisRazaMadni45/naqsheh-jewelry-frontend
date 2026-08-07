@@ -38,9 +38,9 @@ export function FeaturedCategories() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-500" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8">
-                  <span className="text-[10px] font-bold tracking-widest uppercase text-white/60 mb-2 block">
+                  {/* <span className="text-[10px] font-bold tracking-widest uppercase text-white/60 mb-2 block">
                     {category.count} Pieces
-                  </span>
+                  </span> */}
                   <h3 className="font-serif text-xl lg:text-2xl text-white group-hover:text-gold transition-colors duration-300">
                     {category.name}
                   </h3>
