@@ -345,30 +345,17 @@ const handleToggleWishlist = () => {
                   </div>
                 </div>
                 <div className="space-y-6">
-                  {[
-                    { name: 'Sarah M.', rating: 5, date: '2 weeks ago', text: 'Absolutely stunning piece. The craftsmanship is impeccable and the diamonds sparkle beautifully. Worth every penny.' },
-                    { name: 'Emily R.', rating: 5, date: '1 month ago', text: 'Bought this as an anniversary gift and my wife was in tears. The packaging is luxurious and the piece itself is breathtaking.' },
-                    { name: 'Jessica T.', rating: 4, date: '2 months ago', text: 'Beautiful ring, exactly as described. The sizing was perfect. Delivery was fast and the presentation box is gorgeous.' },
-                  ].map((review, i) => (
-                    <div key={i} className="border-b border-border pb-6">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="h-10 w-10 rounded-full bg-gold/10 flex items-center justify-center text-gold font-medium text-sm">
-                          {review.name.charAt(0)}
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium">{review.name}</p>
-                          <p className="text-xs text-muted-foreground">{review.date}</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-1 mb-2">
-                        {[...Array(5)].map((_, j) => (
-                          <Star key={j} className={`h-3 w-3 ${j < review.rating ? 'text-gold fill-gold' : 'text-border'}`} />
-                        ))}
-                      </div>
-                      <p className="text-sm text-muted-foreground">{review.text}</p>
-                    </div>
-                  ))}
-                </div>
+  {[].map((review: any, i: number) => (
+    <div key={i} className="border-b border-border pb-6">
+      {/* ... yehi rehne dein jo andar tha */}
+    </div>
+  ))}
+  {reviews === 0 && (
+    <p className="text-sm text-muted-foreground text-center py-8">
+      No reviews yet. Be the first to review this product!
+    </p>
+  )}
+</div>
               </div>
             </TabsContent>
             <TabsContent value="shipping" className="mt-0">

@@ -32,33 +32,36 @@ export function ShopContent() {
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'All')
   const [selectedPriceRange, setSelectedPriceRange] = useState<string | null>(null)
   const [showNewOnly, setShowNewOnly] = useState(searchParams.get('new') === 'true')
- const [products, setProducts] = useState<any[]>([])
+  const [products, setProducts] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
 
-useEffect(() => {
-  getAllProducts()
-    .then((data) => setProducts(Array.isArray(data) ? data : []))
-    .catch(() => setProducts([]))
-}, [])
+  useEffect(() => {
+    setLoading(true)
+    getAllProducts()
+      .then((data) => setProducts(Array.isArray(data) ? data : []))
+      .catch(() => setProducts([]))
+      .finally(() => setLoading(false))
+  }, [])
 
-// 👇 YE NAYA CODE ADD KAREIN 👇
-useEffect(() => {
-  setSelectedCategory(searchParams.get('category') || 'All')
-}, [searchParams])
- const filteredProducts = useMemo(() => {
-  let result = Array.isArray(products) ? [...products] : []
+  // 👇 YE NAYA CODE ADD KAREIN 👇
+  useEffect(() => {
+    setSelectedCategory(searchParams.get('category') || 'All')
+  }, [searchParams])
+  const filteredProducts = useMemo(() => {
+    let result = Array.isArray(products) ? [...products] : []
 
-  const searchQuery = searchParams.get('search')
-  if (searchQuery) {
-    const fuse = new Fuse(result, {
-      keys: ['name', 'category', 'material', 'description'],
-      threshold: 0.4,
-    })
-    result = fuse.search(searchQuery).map((r) => r.item)
-  }
+    const searchQuery = searchParams.get('search')
+    if (searchQuery) {
+      const fuse = new Fuse(result, {
+        keys: ['name', 'category', 'material', 'description'],
+        threshold: 0.4,
+      })
+      result = fuse.search(searchQuery).map((r) => r.item)
+    }
 
-  if (selectedCategory !== 'All') {
-    result = result.filter((p) => p.category === selectedCategory)
-  }
+    if (selectedCategory !== 'All') {
+      result = result.filter((p) => p.category === selectedCategory)
+    }
 
     if (selectedPriceRange) {
       const range = priceRanges.find((r) => r.label === selectedPriceRange)
@@ -87,7 +90,7 @@ useEffect(() => {
     }
 
     return result
- }, [products, selectedCategory, selectedPriceRange, showNewOnly, sortBy, searchParams])
+  }, [products, selectedCategory, selectedPriceRange, showNewOnly, sortBy, searchParams])
 
   const clearFilters = useCallback(() => {
     setSelectedCategory('All')
@@ -130,11 +133,10 @@ useEffect(() => {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`text-sm transition-colors ${
-                  selectedCategory === cat
+                className={`text-sm transition-colors ${selectedCategory === cat
                     ? 'text-foreground font-medium border-b-2 border-gold pb-1'
                     : 'text-muted-foreground hover:text-foreground'
-                }`}
+                  }`}
               >
                 {cat}
               </button>
@@ -263,7 +265,11 @@ useEffect(() => {
 
           {/* Product Grid */}
           <div className="flex-1">
-            {filteredProducts.length === 0 ? (
+            {loading ? (
+              <div className="text-center py-20">
+                <p className="text-muted-foreground">Loading products...</p>
+              </div>
+            ) : filteredProducts.length === 0 ? (
               <div className="text-center py-20">
                 <p className="text-muted-foreground mb-4">No products match your filters</p>
                 <button onClick={clearFilters} className="text-gold hover:underline text-sm">
@@ -271,19 +277,18 @@ useEffect(() => {
                 </button>
               </div>
             ) : (
-              <div className={`grid gap-6 ${
-                viewMode === 'grid'
+              <div className={`grid gap-6 ${viewMode === 'grid'
                   ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
                   : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-              }`}>
+                }`}>
                 {filteredProducts.map((product) => (
-  <ProductCard
-    key={product._id}
-    id={product._id}
-    {...product}
-    image={product.image?.[0] || ''}
-  />
-))}
+                  <ProductCard
+                    key={product._id}
+                    id={product._id}
+                    {...product}
+                    image={product.image?.[0] || ''}
+                  />
+                ))}
               </div>
             )}
           </div>
