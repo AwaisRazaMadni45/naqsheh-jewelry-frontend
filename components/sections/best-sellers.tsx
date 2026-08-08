@@ -35,16 +35,16 @@ export function BestSellers() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {bestsellers.map((product) => (
-            <ProductCard
-              key={product._id}
-              id={product._id}
-              {...product}
-              image={product.image?.[0] || ''}
-            />
-          ))}
-        </div>
+       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
+  {bestsellers.map((product) => (
+    <ProductCard
+      key={product._id}
+      id={product._id}
+      {...product}
+      image={product.image?.[0] || ''}
+    />
+  ))}
+</div>
       </div>
     </section>
   )

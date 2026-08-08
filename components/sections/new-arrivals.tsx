@@ -73,7 +73,7 @@ export function NewArrivals() {
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {newProducts.map((product) => (
-            <div key={product._id} className="min-w-[280px] sm:min-w-[300px] snap-start">
+            <div key={product._id} className="min-w-[160px] sm:min-w-[300px] snap-start">
               <ProductCard
                 id={product._id}
                 {...product}
