@@ -7,16 +7,37 @@ import { ArrowRight, ChevronDown } from 'lucide-react'
 export function HeroSection() {
   return (
     <section className="relative h-screen min-h-[600px] flex items-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-  <img
-  src="/images/naqsheh-logo.jpeg"
-  alt="Naqsheh"
-  className="w-full h-full object-contain md:object-cover bg-[#f5ede0]"
-/>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
-      </div>
+   {/* Background Image */}
+<div className="absolute inset-0">
+  {/* Desktop: single logo background */}
+  <div className="hidden md:block w-full h-full">
+    <img
+      src="/images/naqsheh-logo.jpeg"
+      alt="Naqsheh"
+      className="w-full h-full object-cover"
+    />
+  </div>
+
+  {/* Mobile: bigger logo header, then images fill rest of hero */}
+  <div className="md:hidden w-full h-full flex flex-col">
+    <div className="h-48 bg-[#f5ede0] flex items-center justify-center flex-shrink-0">
+      <img
+        src="/images/naqsheh-logo.jpeg"
+        alt="Naqsheh"
+        className="h-32 object-contain"
+      />
+    </div>
+    <div className="flex-1 relative grid grid-cols-2 grid-rows-2">
+      <img src="/images/rings/ring1.jpeg" alt="Rings" className="w-full h-full object-cover" />
+      <img src="/images/necklaces/necklace1.jpeg" alt="Necklaces" className="w-full h-full object-cover" />
+      <img src="/images/earrings/earring13.jpeg" alt="Earrings" className="w-full h-full object-cover" />
+      <img src="/images/bracelets/b2.jpeg" alt="Bracelets" className="w-full h-full object-cover" />
+    </div>
+  </div>
+
+  <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/20 md:from-black/60 md:via-black/30 md:to-transparent" />
+  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
+</div>
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 w-full">
