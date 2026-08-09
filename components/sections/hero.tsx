@@ -9,31 +9,30 @@ export function HeroSection() {
     <section className="relative h-screen min-h-[600px] flex items-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-  <div className="absolute inset-0">
-  {/* Desktop: single logo background, normal cover */}
-  <div className="hidden md:block w-full h-full">
-    <img
-      src="/images/naqsheh-logo.jpeg"
-      alt="Naqsheh"
-      className="w-full h-full object-cover"
-    />
-  </div>
+        {/* Desktop: normal cover background */}
+        <div className="hidden md:block w-full h-full">
+          <img
+            src="/images/naqsheh-logo.jpeg"
+            alt="Naqsheh"
+            className="w-full h-full object-cover"
+          />
+        </div>
 
-  {/* Mobile: logo stretched full-width as a banner strip, fixed height */}
-  <div className="md:hidden w-full h-full flex flex-col">
-    <div className="w-full h-56 bg-[#f5ede0]">
-      <img
-        src="/images/naqsheh-logo.jpeg"
-        alt="Naqsheh"
-        className="w-full h-full object-fill"
-      />
-    </div>
-    <div className="flex-1 bg-[#f5ede0]" />
-  </div>
+        {/* Mobile: logo stretched full-width as a banner strip, fixed height */}
+        <div className="md:hidden w-full h-full flex flex-col">
+          <div className="w-full h-56 bg-[#f5ede0]">
+            <img
+              src="/images/naqsheh-logo.jpeg"
+              alt="Naqsheh"
+              className="w-full h-full object-fill"
+            />
+          </div>
+          <div className="flex-1 bg-[#f5ede0]" />
+        </div>
 
-  <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/20 md:from-black/60 md:via-black/30 md:to-transparent" />
-  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
-</div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/20 md:from-black/60 md:via-black/30 md:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
+      </div>
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 w-full">
@@ -67,7 +66,8 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-base sm:text-lg text-white/70 mb-10 max-w-lg leading-relaxed"
           >
-Handcrafted fine jewelry, designed for the discerning woman.          </motion.p>
+            Handcrafted fine jewelry, designed for the discerning woman.
+          </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
