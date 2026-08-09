@@ -7,6 +7,7 @@ import { SlidersHorizontal, X, Grid3X3, LayoutGrid, ChevronDown } from 'lucide-r
 import { ProductCard } from '@/components/product-card'
 import { getAllProducts } from '@/lib/api'
 import Fuse from 'fuse.js'
+
 const priceRanges = [
   { label: 'Under Rs 500', min: 0, max: 500 },
   { label: 'Rs 500 - Rs 1,000', min: 500, max: 1000 },
@@ -32,6 +33,8 @@ export function ShopContent() {
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'All')
   const [selectedPriceRange, setSelectedPriceRange] = useState<string | null>(null)
   const [showNewOnly, setShowNewOnly] = useState(searchParams.get('new') === 'true')
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 20
   const [products, setProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -43,10 +46,10 @@ export function ShopContent() {
       .finally(() => setLoading(false))
   }, [])
 
-  // 👇 YE NAYA CODE ADD KAREIN 👇
   useEffect(() => {
     setSelectedCategory(searchParams.get('category') || 'All')
   }, [searchParams])
+
   const filteredProducts = useMemo(() => {
     let result = Array.isArray(products) ? [...products] : []
 
@@ -91,6 +94,16 @@ export function ShopContent() {
 
     return result
   }, [products, selectedCategory, selectedPriceRange, showNewOnly, sortBy, searchParams])
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [selectedCategory, selectedPriceRange, showNewOnly, sortBy, searchParams])
+
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  )
 
   const clearFilters = useCallback(() => {
     setSelectedCategory('All')
@@ -277,20 +290,52 @@ export function ShopContent() {
                 </button>
               </div>
             ) : (
-             <div className={`grid gap-3 md:gap-6 ${
-  viewMode === 'grid'
-    ? 'grid-cols-2 sm:grid-cols-2 lg:grid-cols-3'
-    : 'grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-}`}>
-                {filteredProducts.map((product) => (
-                  <ProductCard
-                    key={product._id}
-                    id={product._id}
-                    {...product}
-                    image={product.image?.[0] || ''}
-                  />
-                ))}
-              </div>
+              <>
+                <div className={`grid gap-3 md:gap-6 ${
+                  viewMode === 'grid'
+                    ? 'grid-cols-2 sm:grid-cols-2 lg:grid-cols-3'
+                    : 'grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+                }`}>
+                  {paginatedProducts.map((product) => (
+                    <ProductCard
+                      key={product._id}
+                      id={product._id}
+                      {...product}
+                      image={product.image?.[0] || ''}
+                    />
+                  ))}
+                </div>
+
+                {totalPages > 1 && (
+                  <div className="flex items-center justify-center gap-2 mt-10">
+                    <button
+                      onClick={() => {
+                        setCurrentPage((p) => Math.max(1, p - 1))
+                        window.scrollTo({ top: 0, behavior: 'smooth' })
+                      }}
+                      disabled={currentPage === 1}
+                      className="h-10 px-4 border border-border rounded-md text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-muted transition-colors"
+                    >
+                      Previous
+                    </button>
+
+                    <span className="text-sm text-muted-foreground px-3">
+                      Page {currentPage} of {totalPages}
+                    </span>
+
+                    <button
+                      onClick={() => {
+                        setCurrentPage((p) => Math.min(totalPages, p + 1))
+                        window.scrollTo({ top: 0, behavior: 'smooth' })
+                      }}
+                      disabled={currentPage === totalPages}
+                      className="h-10 px-4 border border-border rounded-md text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-muted transition-colors"
+                    >
+                      Next
+                    </button>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
