@@ -19,17 +19,16 @@ export function HeroSection() {
         </div>
 
         {/* Mobile: logo stretched full-width as a banner strip, fixed height */}
-       {/* Mobile: logo full-width, natural aspect ratio */}
-<div className="md:hidden w-full h-full flex flex-col">
-  <div className="w-full bg-[#f5ede0]">
-    <img
-      src="/images/naqsheh-logo.jpeg"
-      alt="Naqsheh"
-      className="w-full h-auto"
-    />
-  </div>
-  <div className="flex-1 bg-[#f5ede0]" />
-</div>
+        <div className="md:hidden w-full h-full flex flex-col">
+          <div className="w-full h-56 bg-[#f5ede0]">
+            <img
+              src="/images/naqsheh-logo.jpeg"
+              alt="Naqsheh"
+              className="w-full h-full object-fill"
+            />
+          </div>
+          <div className="flex-1 bg-[#f5ede0]" />
+        </div>
 
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/20 md:from-black/60 md:via-black/30 md:to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
