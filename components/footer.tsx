@@ -105,7 +105,7 @@ function TikTokIcon({ className }: { className?: string }) {
               <a href="https://www.facebook.com/profile.php?id=61591472600822" className="text-white/50 hover:text-gold transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="https://tiktok.com/@YOUR_USERNAME" target="_blank" rel="noopener noreferrer" className="...">
+              <a href="https://www.tiktok.com/@naqsheh3?_r=1&_t=ZS-98l3jQplP1u" target="_blank" rel="noopener noreferrer" className="...">
     <TikTokIcon className="h-5 w-5" />
   </a>
               {/* <a href="#" className="text-white/50 hover:text-gold transition-colors">
