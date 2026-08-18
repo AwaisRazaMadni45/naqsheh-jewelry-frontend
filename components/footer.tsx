@@ -155,7 +155,7 @@ function TikTokIcon({ className }: { className?: string }) {
               </div>
               <div className="flex items-center gap-2 text-sm text-white/60">
                 <Mail className="h-4 w-4" />
-                <span>awaisrazamadni67@gmail.com</span>
+                <span>naqshehjewels@gmail.com</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-white/60">
                 <MapPin className="h-4 w-4" />
