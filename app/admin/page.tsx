@@ -102,10 +102,12 @@ export default function AdminPage() {
                 <tr key={order._id} className="border-t border-border">
                   <td className="py-3 px-4 font-mono text-xs">{order._id.slice(-8)}</td>
                   <td className="py-3 px-4">
-                    {order.user?.name || 'N/A'}
-                    <br />
-                    <span className="text-xs text-muted-foreground">{order.user?.email}</span>
-                  </td>
+  <p className="font-medium">{order.user?.name || 'N/A'}</p>
+  <p className="text-xs text-muted-foreground">{order.user?.email}</p>
+  <p className="text-xs text-muted-foreground mt-1">
+    {order.shippingAddress?.address}, {order.shippingAddress?.city}
+  </p>
+</td>
                   <td className="py-3 px-4">{order.orderItems?.length || 0} item(s)</td>
                   <td className="py-3 px-4">{formatPrice(order.totalPrice)}</td>
                   <td className="py-3 px-4 text-xs text-muted-foreground">
