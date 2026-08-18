@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useCart } from '@/components/cart-context'
 import { useAuth } from '@/components/auth-context'
@@ -21,7 +21,14 @@ export default function CheckoutPage() {
   const [error, setError] = useState('')
 
   const formatPrice = (price: number) => `Rs ${price.toLocaleString('en-PK')}`
-
+useEffect(() => {
+  if (typeof window !== 'undefined' && (window as any).fbq) {
+    ;(window as any).fbq('track', 'InitiateCheckout', {
+      value: totalPrice,
+      currency: 'PKR',
+    })
+  }
+}, [])
   const handlePlaceOrder = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')

@@ -9,12 +9,20 @@ const API_URL = '/api'
 export default function OrderConfirmationPage({ params }: { params: { id: string } }) {
   const [order, setOrder] = useState<any>(null)
 
-  useEffect(() => {
-    fetch(`${API_URL}/orders/${params.id}`)
-      .then((res) => res.json())
-      .then((data) => setOrder(data.order))
-      .catch(() => setOrder(null))
-  }, [params.id])
+useEffect(() => {
+  fetch(`${API_URL}/orders/${params.id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      setOrder(data.order)
+      if (typeof window !== 'undefined' && (window as any).fbq && data.order) {
+        ;(window as any).fbq('track', 'Purchase', {
+          value: data.order.totalPrice,
+          currency: 'PKR',
+        })
+      }
+    })
+    .catch(() => setOrder(null))
+}, [params.id])
 
   return (
     <div className="min-h-screen pt-32 text-center px-4 pb-16">

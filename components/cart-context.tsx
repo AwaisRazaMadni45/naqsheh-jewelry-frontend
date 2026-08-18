@@ -44,17 +44,25 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [items, isLoaded])
 
-  const addToCart = (item: Omit<CartItem, 'quantity'>, quantity: number = 1) => {
-    setItems((prev) => {
-      const existing = prev.find((i) => i.id === item.id)
-      if (existing) {
-        return prev.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + quantity } : i
-        )
-      }
-      return [...prev, { ...item, quantity }]
+const addToCart = (item: Omit<CartItem, 'quantity'>, quantity: number = 1) => {
+  setItems((prev) => {
+    const existing = prev.find((i) => i.id === item.id)
+    if (existing) {
+      return prev.map((i) =>
+        i.id === item.id ? { ...i, quantity: i.quantity + quantity } : i
+      )
+    }
+    return [...prev, { ...item, quantity }]
+  })
+
+  if (typeof window !== 'undefined' && (window as any).fbq) {
+    ;(window as any).fbq('track', 'AddToCart', {
+      content_name: item.name,
+      value: item.price,
+      currency: 'PKR',
     })
   }
+}
 
   const removeFromCart = (id: string) => {
     setItems((prev) => prev.filter((i) => i.id !== id))
