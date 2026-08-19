@@ -374,14 +374,51 @@ export function Navbar() {
                   </div>
                 </div>
               </nav>
-              <div className="p-4 border-t border-border flex gap-4">
-                <Button variant="outline" className="flex-1 gap-2">
-                  <Heart className="h-4 w-4" /> Wishlist
-                </Button>
-                <Button variant="outline" className="flex-1 gap-2">
-                  <ShoppingBag className="h-4 w-4" /> Cart
-                </Button>
-              </div>
+              <div className="p-4 border-t border-border space-y-3">
+  {user ? (
+    <div className="space-y-2">
+      <div className="px-2">
+        <p className="text-sm font-medium">{user.name}</p>
+        <p className="text-xs text-muted-foreground">{user.email}</p>
+      </div>
+      <Link href="/orders" onClick={() => setIsMobileMenuOpen(false)}>
+        <Button variant="outline" className="w-full justify-start">My Orders</Button>
+      </Link>
+      {user.isAdmin && (
+        <Link href="/admin" onClick={() => setIsMobileMenuOpen(false)}>
+          <Button variant="outline" className="w-full justify-start">Admin Panel</Button>
+        </Link>
+      )}
+      <Button
+        variant="outline"
+        className="w-full justify-start text-red-500"
+        onClick={() => {
+          logout()
+          setIsMobileMenuOpen(false)
+        }}
+      >
+        Logout
+      </Button>
+    </div>
+  ) : (
+    <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
+      <Button variant="outline" className="w-full">Login / Sign Up</Button>
+    </Link>
+  )}
+
+  <div className="flex gap-4">
+    <Link href="/wishlist" onClick={() => setIsMobileMenuOpen(false)} className="flex-1">
+      <Button variant="outline" className="w-full gap-2">
+        <Heart className="h-4 w-4" /> Wishlist {wishlistCount > 0 && `(${wishlistCount})`}
+      </Button>
+    </Link>
+    <Link href="/cart" onClick={() => setIsMobileMenuOpen(false)} className="flex-1">
+      <Button variant="outline" className="w-full gap-2">
+        <ShoppingBag className="h-4 w-4" /> Cart {totalItems > 0 && `(${totalItems})`}
+      </Button>
+    </Link>
+  </div>
+</div>
             </div>
           </motion.div>
         )}
