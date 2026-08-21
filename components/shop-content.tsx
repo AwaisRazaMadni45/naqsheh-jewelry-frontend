@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useMemo, useEffect } from 'react'
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { SlidersHorizontal, X, Grid3X3, LayoutGrid, ChevronDown } from 'lucide-react'
@@ -37,6 +37,7 @@ export function ShopContent() {
   const itemsPerPage = 20
   const [products, setProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const topRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setLoading(true)
@@ -104,6 +105,12 @@ export function ShopContent() {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   )
+
+  useEffect(() => {
+    if (topRef.current) {
+      topRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [currentPage])
 
   const clearFilters = useCallback(() => {
     setSelectedCategory('All')
@@ -277,7 +284,7 @@ export function ShopContent() {
           </aside>
 
           {/* Product Grid */}
-          <div className="flex-1">
+          <div className="flex-1" ref={topRef}>
             {loading ? (
               <div className="text-center py-20">
                 <p className="text-muted-foreground">Loading products...</p>
@@ -309,10 +316,7 @@ export function ShopContent() {
                 {totalPages > 1 && (
                   <div className="flex items-center justify-center gap-2 mt-10">
                     <button
-                      onClick={() => {
-                        setCurrentPage((p) => Math.max(1, p - 1))
-                        window.scrollTo({ top: 0, behavior: 'smooth' })
-                      }}
+                      onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                       disabled={currentPage === 1}
                       className="h-10 px-4 border border-border rounded-md text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-muted transition-colors"
                     >
@@ -324,10 +328,7 @@ export function ShopContent() {
                     </span>
 
                     <button
-                      onClick={() => {
-                        setCurrentPage((p) => Math.min(totalPages, p + 1))
-                        window.scrollTo({ top: 0, behavior: 'smooth' })
-                      }}
+                      onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                       disabled={currentPage === totalPages}
                       className="h-10 px-4 border border-border rounded-md text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-muted transition-colors"
                     >

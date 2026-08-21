@@ -3,8 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, notFound } from 'next/navigation'
 import { ProductDetail } from '@/components/product-detail'
-import { getProductById, getAllProducts } from '@/lib/api'
-
+import { getProductById, getProductsByCategory } from '@/lib/api'
 export default function ProductPage() {
   const params = useParams()
   const id = params.id as string
@@ -16,25 +15,25 @@ export default function ProductPage() {
 
   useEffect(() => {
     getProductById(id)
-      .then(async (data) => {
-        if (!data) {
-          setNotFoundFlag(true)
-          setLoading(false)
-          return
-        }
-        setProduct(data)
+  .then(async (data) => {
+    if (!data) {
+      setNotFoundFlag(true)
+      setLoading(false)
+      return
+    }
+    setProduct(data)
 
-        const allProducts = await getAllProducts()
-        const related = (Array.isArray(allProducts) ? allProducts : [])
-          .filter((p: any) => p.category === data.category && p._id !== data._id)
-          .slice(0, 4)
-        setRelatedProducts(related)
-        setLoading(false)
-      })
-      .catch(() => {
-        setNotFoundFlag(true)
-        setLoading(false)
-      })
+    const related = await getProductsByCategory(data.category, 6)
+    const filtered = (Array.isArray(related) ? related : [])
+      .filter((p: any) => p._id !== data._id)
+      .slice(0, 4)
+    setRelatedProducts(filtered)
+    setLoading(false)
+  })
+  .catch(() => {
+    setNotFoundFlag(true)
+    setLoading(false)
+  })
   }, [id])
 
   if (loading) {

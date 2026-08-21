@@ -55,7 +55,10 @@ export async function POST(req: NextRequest) {
 export async function GET() {
   try {
     await connectDB()
-    const orders = await Order.find().populate('user', 'name email').sort({ createdAt: -1 })
+    const orders = await Order.find()
+      .populate('user', 'name email')
+      .populate('orderItems.product', 'name image')
+      .sort({ createdAt: -1 })
 
     return NextResponse.json({ success: true, count: orders.length, orders })
   } catch (error: any) {

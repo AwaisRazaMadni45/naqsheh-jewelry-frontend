@@ -108,8 +108,15 @@ export default function AdminPage() {
     {order.shippingAddress?.address}, {order.shippingAddress?.city}
   </p>
 </td>
-                  <td className="py-3 px-4">{order.orderItems?.length || 0} item(s)</td>
-                  <td className="py-3 px-4">{formatPrice(order.totalPrice)}</td>
+<td className="py-3 px-4">
+  <div className="space-y-1">
+    {order.orderItems?.map((item: any, idx: number) => (
+      <p key={idx} className="text-xs">
+        {item.product?.name || 'Unknown product'} × {item.quantity}
+      </p>
+    ))}
+  </div>
+</td>                  <td className="py-3 px-4">{formatPrice(order.totalPrice)}</td>
                   <td className="py-3 px-4 text-xs text-muted-foreground">
                     {new Date(order.createdAt).toLocaleDateString()}
                   </td>

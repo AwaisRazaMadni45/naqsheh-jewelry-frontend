@@ -72,3 +72,10 @@ export async function getAllSubscribers() {
   const data = await res.json()
   return data.subscribers
 }
+
+
+export async function getProductsByCategory(category: string, limit: number = 5) {
+  const res = await fetch(`${API_URL}/products?category=${encodeURIComponent(category)}&limit=${limit}`, { cache: 'no-store' })
+  const data = await res.json()
+  return data.products
+}
