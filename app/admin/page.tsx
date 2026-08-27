@@ -104,9 +104,12 @@ export default function AdminPage() {
                   <td className="py-3 px-4">
   <p className="font-medium">{order.user?.name || 'N/A'}</p>
   <p className="text-xs text-muted-foreground">{order.user?.email}</p>
-  <p className="text-xs text-muted-foreground mt-1">
-    {order.shippingAddress?.address}, {order.shippingAddress?.city}
-  </p>
+ <p className="text-xs text-muted-foreground mt-1">
+  {order.shippingAddress?.address}, {order.shippingAddress?.city}
+</p>
+<p className="text-xs text-muted-foreground">
+  📞 {order.shippingAddress?.phone}
+</p>
 </td>
 <td className="py-3 px-4">
   <div className="space-y-1">

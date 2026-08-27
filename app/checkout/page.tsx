@@ -13,6 +13,7 @@ export default function CheckoutPage() {
   const router = useRouter()
 
   const [address, setAddress] = useState('')
+  const [phone, setPhone] = useState('')
   const [city, setCity] = useState('')
   const [postalCode, setPostalCode] = useState('')
   const [country, setCountry] = useState('Pakistan')
@@ -50,7 +51,7 @@ useEffect(() => {
             quantity: item.quantity,
             price: item.price,
           })),
-          shippingAddress: { address, city, postalCode, country },
+          shippingAddress: { address, city, postalCode, country, phone },
           totalPrice,
           paymentMethod,
         }),
@@ -86,15 +87,37 @@ useEffect(() => {
 
           {error && <div className="p-3 bg-red-50 text-red-600 text-sm rounded-md">{error}</div>}
 
-          <div>
-            <label className="text-sm font-medium mb-1 block">Address</label>
-            <input
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              required
-              className="w-full h-12 px-4 border border-border rounded-md focus:outline-none focus:border-gold"
-            />
-          </div>
+        <div>
+  <label className="text-sm font-medium mb-1 block">Phone Number</label>
+  <input
+    type="tel"
+    value={phone}
+    onChange={(e) => setPhone(e.target.value)}
+    required
+    placeholder="03XX-XXXXXXX"
+    className="w-full h-12 px-4 border border-border rounded-md focus:outline-none focus:border-gold"
+  />
+</div>
+<div>
+  <label className="text-sm font-medium mb-1 block">Phone Number</label>
+  <input
+    type="tel"
+    value={phone}
+    onChange={(e) => setPhone(e.target.value)}
+    required
+    placeholder="03XX-XXXXXXX"
+    className="w-full h-12 px-4 border border-border rounded-md focus:outline-none focus:border-gold"
+  />
+</div>
+<div>
+  <label className="text-sm font-medium mb-1 block">Address</label>
+  <input
+    value={address}
+    onChange={(e) => setAddress(e.target.value)}
+    required
+    className="w-full h-12 px-4 border border-border rounded-md focus:outline-none focus:border-gold"
+  />
+</div>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-medium mb-1 block">City</label>
