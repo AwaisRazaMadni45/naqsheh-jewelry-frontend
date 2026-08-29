@@ -1,10 +1,10 @@
 export const categories = [
-  { name: 'Rings', image: '/images/rings/ring1.png', count: 0 },
-  { name: 'Necklaces', image: '/images/necklaces/necklace2.png', count: 0 },
-  { name: 'Earrings', image: '/images/earrings/earring14.png', count: 0 },
+  { name: 'Rings', image: '/images/rings/ring10.png', count: 0 },
+  { name: 'Necklaces', image: '/images/necklaces/Swan Diamond Pendant and Black Cushion-Cut Stone.jpeg', count: 0 },
+  { name: 'Earrings', image: '/images/earrings/Zaywar Multi Saffron Solstice Jhumka.png', count: 0 },
   { name: 'Watches', image: '/images/watches/watch4.png', count: 0 },
   { name: 'Hand Harness', image: '/images/handharness/k2.jpeg', count: 0 },
-  { name: 'Bracelets', image: '/images/bracelets/b1.png', count: 0 },
+  { name: 'Bracelets', image: '/images/bracelets/b3.png', count: 0 },
 ]
 export const products = [
   {
