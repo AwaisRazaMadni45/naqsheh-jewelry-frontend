@@ -4,7 +4,7 @@ export const categories = [
   { name: 'Earrings', image: '/images/earrings/Zaywar Multi Saffron Solstice Jhumka.png', count: 0 },
   { name: 'Watches', image: '/images/watches/watch4.png', count: 0 },
   { name: 'Hand Harness', image: '/images/handharness/k2.jpeg', count: 0 },
-  { name: 'Bracelets', image: '/images/bracelets/b3.png', count: 0 },
+  { name: 'Bracelets', image: '/images/bracelets/b2.jpeg', count: 0 },
 ]
 export const products = [
   {
