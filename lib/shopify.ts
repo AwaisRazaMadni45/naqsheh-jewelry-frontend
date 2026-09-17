@@ -119,7 +119,7 @@ export async function getProductVariant(productLegacyId: string) {
 export async function getProductsByIds(legacyIds: string[]) {
   if (legacyIds.length === 0) return {}
 
-  const gids = [...new Set(legacyIds)].map((id) => `gid://shopify/Product/${id}`)
+  const gids = Array.from(new Set(legacyIds)).map((id) => `gid://shopify/Product/${id}`)
 
   const data = await shopifyAdminFetch<any>(
     `
