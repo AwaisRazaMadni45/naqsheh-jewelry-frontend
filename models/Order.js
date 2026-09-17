@@ -5,7 +5,7 @@ const orderSchema = new mongoose.Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     orderItems: [
       {
-        product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+        product: { type: String, required: true },
         quantity: { type: Number, required: true },
         price: { type: Number, required: true },
       },
@@ -17,6 +17,8 @@ const orderSchema = new mongoose.Schema(
       country: { type: String, required: true },
     },
     totalPrice: { type: Number, required: true, default: 0 },
+    shopifyOrderId: { type: String },
+    shopifyOrderName: { type: String },
     isPaid: { type: Boolean, default: false },
     paidAt: { type: Date },
     status: {
@@ -33,4 +35,10 @@ const orderSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-export default mongoose.models.Order || mongoose.model('Order', orderSchema)
+// Dev mode me Next.js hot-reload ke dauran Mongoose purana schema cache kar
+// leta hai. Ye line hamesha latest schema use karna confirm karti hai.
+if (mongoose.models.Order) {
+  delete mongoose.models.Order
+}
+
+export default mongoose.model('Order', orderSchema)

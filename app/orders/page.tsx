@@ -1,8 +1,9 @@
-    'use client'
+'use client'
 
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/components/auth-context'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 const API_URL = '/api'
 
@@ -43,14 +44,39 @@ export default function OrdersPage() {
         <div className="space-y-4">
           {orders.map((order) => (
             <div key={order._id} className="border border-border rounded-lg p-4">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-xs font-mono text-muted-foreground">#{order._id.slice(-8)}</span>
-                <span className="text-xs px-2 py-1 bg-muted rounded-full">{order.status || 'Pending'}</span>
+              <div className="flex justify-between items-center mb-3">
+                <span className="text-xs font-mono text-muted-foreground">
+                  {order.shopifyOrderName || `#${order._id.slice(-8)}`}
+                </span>
+                <span className="text-xs px-2 py-1 bg-muted rounded-full">
+                  {order.status || 'Pending'}
+                </span>
               </div>
-              <p className="text-sm text-muted-foreground mb-1">
-                {new Date(order.createdAt).toLocaleDateString()}
-              </p>
-              <p className="font-medium">{formatPrice(order.totalPrice)}</p>
+
+              <div className="space-y-3 mb-3">
+                {order.orderItems.map((item: any, idx: number) => (
+                  <div key={idx} className="flex items-center gap-3">
+                    <div className="relative w-14 h-14 rounded-md overflow-hidden bg-muted shrink-0">
+                      {item.image && (
+                        <Image src={item.image} alt={item.name} fill className="object-cover" />
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium truncate">{item.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        Qty: {item.quantity} × {formatPrice(item.price)}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex justify-between items-center pt-3 border-t border-border">
+                <p className="text-sm text-muted-foreground">
+                  {new Date(order.createdAt).toLocaleDateString()}
+                </p>
+                <p className="font-medium">{formatPrice(order.totalPrice)}</p>
+              </div>
             </div>
           ))}
         </div>
