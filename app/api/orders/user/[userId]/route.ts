@@ -14,7 +14,7 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
     const productInfo = await getProductsByIds(allProductIds)
 
     const enrichedOrders = orders.map((order) => {
-      const obj = order.toObject()
+      const obj: any = order.toObject()
       obj.orderItems = obj.orderItems.map((item: any) => ({
         ...item,
         name: productInfo[item.product]?.name || 'Product',
