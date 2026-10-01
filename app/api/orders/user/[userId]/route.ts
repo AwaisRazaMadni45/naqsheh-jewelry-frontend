@@ -10,12 +10,15 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
 
     // Sab orders ke andar jitne bhi product IDs hain, unko ek saath Shopify se
     // fetch karo (naam + image), taake "My Orders" me dikha sakein
-    const allProductIds = orders.flatMap((o) => o.orderItems.map((i: any) => i.product))
+    const allProductIds: string[] = orders.flatMap((o: any) =>
+      (o.orderItems as any[]).map((i: any) => i.product as string)
+    )
     const productInfo = await getProductsByIds(allProductIds)
 
-    const enrichedOrders = orders.map((order) => {
-      const obj: any = order.toObject()
-      obj.orderItems = obj.orderItems.map((item: any) => ({
+    const enrichedOrders = orders.map((order: any) => {
+      const obj = order.toObject() as Record<string, any>
+      const items = obj.orderItems as any[]
+      obj.orderItems = items.map((item: any) => ({
         ...item,
         name: productInfo[item.product]?.name || 'Product',
         image: productInfo[item.product]?.image || null,
