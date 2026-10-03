@@ -50,12 +50,11 @@ export function ProductCard({ id, name, price, rating, reviews, image, category,
 
   const formatPrice = (price: number) => `Rs ${price.toLocaleString('en-PK')}`
 
-  // Hover shuru hone par auto-scroll start karo (1.2s per image)
   const startAutoScroll = useCallback(() => {
-    if (!hasMultiple) return
+    if (!hasMultiple || intervalRef.current) return
     intervalRef.current = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % images.length)
-    }, 1200)
+    }, 2000)
   }, [hasMultiple, images.length])
 
   const stopAutoScroll = useCallback(() => {
@@ -65,21 +64,23 @@ export function ProductCard({ id, name, price, rating, reviews, image, category,
     }
   }, [])
 
+  // Page load hone par hi auto-scroll shuru — mobile + desktop dono ke liye
+  useEffect(() => {
+    startAutoScroll()
+    return () => stopAutoScroll()
+  }, [startAutoScroll, stopAutoScroll])
+
   const handleMouseEnter = () => {
     setIsHovered(true)
-    startAutoScroll()
   }
 
   const handleMouseLeave = () => {
     setIsHovered(false)
-    stopAutoScroll()
-    setActiveIndex(0)
   }
 
-  // Cursor position se bhi image change karo (left/right zones)
+  // Desktop par cursor move karne se image change hoti hai (auto-scroll temporarily pause)
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!hasMultiple || !imgContainerRef.current) return
-    // Auto-scroll band karo jab cursor move ho — cursor control le leta hai
     stopAutoScroll()
     const rect = imgContainerRef.current.getBoundingClientRect()
     const relX = e.clientX - rect.left
@@ -88,16 +89,11 @@ export function ProductCard({ id, name, price, rating, reviews, image, category,
     setActiveIndex(newIndex)
   }
 
-  // Hover khatam hone ke baad auto-scroll phir shuru karo (agar abhi bhi hovered ho)
-  const handleMouseMoveEnd = useCallback(() => {
-    if (isHovered && hasMultiple && !intervalRef.current) {
-      startAutoScroll()
-    }
-  }, [isHovered, hasMultiple, startAutoScroll])
-
-  useEffect(() => {
-    return () => stopAutoScroll()
-  }, [stopAutoScroll])
+  // Cursor hat jaye to auto-scroll resume
+  const handleMouseLeaveWithResume = () => {
+    setIsHovered(false)
+    startAutoScroll()
+  }
 
   return (
     <motion.div
@@ -111,7 +107,7 @@ export function ProductCard({ id, name, price, rating, reviews, image, category,
         ref={imgContainerRef}
         className="relative overflow-hidden rounded-lg bg-muted/30 mb-4 aspect-square cursor-pointer"
         onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseLeave={handleMouseLeaveWithResume}
         onMouseMove={handleMouseMove}
       >
         <Link href={`/product/${id}`}>
