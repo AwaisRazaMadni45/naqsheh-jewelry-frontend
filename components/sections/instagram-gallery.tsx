@@ -16,7 +16,7 @@ export function InstagramGallery() {
           className="text-center mb-12"
         >
           <span className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3 block">
-            Follow @LunaJewelry
+            Follow @naqshehofficials
           </span>
           <h2 className="font-serif text-3xl lg:text-4xl text-foreground mb-4">Instagram</h2>
           <p className="text-muted-foreground max-w-md mx-auto">

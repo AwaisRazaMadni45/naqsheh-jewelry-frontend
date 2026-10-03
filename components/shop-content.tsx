@@ -308,7 +308,7 @@ export function ShopContent() {
                       key={product._id}
                       id={product._id}
                       {...product}
-                      image={product.image?.[0] || ''}
+                      image={product.image || ''}
                     />
                   ))}
                 </div>

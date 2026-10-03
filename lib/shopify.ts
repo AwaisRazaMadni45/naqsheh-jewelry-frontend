@@ -114,8 +114,54 @@ export async function getProductVariant(productLegacyId: string) {
   }
 }
 
-// Order history dikhane ke liye — kai product IDs ek saath fetch karta hai
-// (naam + image), taake order items ke saath dikhaya ja sake
+// ─── Shared product mapping helpers ────────────────────────────────────────
+// Ye fields teeno product routes (list, single, best-sellers) mein same hain.
+// Ek jagah define karo, teen jagah import karo.
+
+export const PRODUCT_FIELDS = `
+  id
+  legacyResourceId
+  title
+  description
+  productType
+  tags
+  totalInventory
+  images(first: 10) {
+    edges { node { url } }
+  }
+  variants(first: 1) {
+    edges { node { price inventoryQuantity } }
+  }
+`
+
+export function mapShopifyProduct(node: any) {
+  const variant = node.variants?.edges?.[0]?.node
+  const images: string[] = node.images?.edges?.map((e: any) => e.node.url) || []
+  const tags: string[] = node.tags || []
+
+  return {
+    _id: node.legacyResourceId as string,
+    id: node.legacyResourceId as string,
+    name: node.title as string,
+    description: (node.description || '') as string,
+    price: variant ? Number(variant.price) : 0,
+    category: (node.productType || 'Uncategorized') as string,
+    image: images,
+    stock: (node.totalInventory ?? 0) as number,
+    discount: 0,
+    rating: 0,
+    soldCount: 0,
+    material: '',
+    sizes: [] as string[],
+    isNew: tags.includes('new'),
+    isBestseller: tags.includes('bestseller'),
+    reviewsCount: 0,
+  }
+}
+
+// ─── Order history ───────────────────────────────────────────────────────────
+// Kai product IDs ek saath fetch karta hai (naam + image),
+// taake order items ke saath dikhaya ja sake
 export async function getProductsByIds(legacyIds: string[]) {
   if (legacyIds.length === 0) return {}
 

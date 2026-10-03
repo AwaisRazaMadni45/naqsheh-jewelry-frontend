@@ -46,7 +46,6 @@ const shippingDetails = shippingRates[product.category] || { fee: 'Affordable Sh
   const [selectedImage, setSelectedImage] = useState(0)
   const [selectedSize, setSelectedSize] = useState(sizes[0] || '')
   const [quantity, setQuantity] = useState(1)
-  const [isWishlisted, setIsWishlisted] = useState(false)
   const [isZoomed, setIsZoomed] = useState(false)
   const [addedToCart, setAddedToCart] = useState(false)
 
@@ -440,7 +439,7 @@ const handleToggleWishlist = () => {
                   key={item._id}
                   id={item._id}
                   {...item}
-                  image={item.image?.[0] || ''}
+                  image={item.image || ''}
                 />
               ))}
             </div>
