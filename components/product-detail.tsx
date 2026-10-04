@@ -9,7 +9,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useRouter } from 'next/navigation'
 import { useCart } from '@/components/cart-context'
 import { useWishlist } from '@/components/wishlist-context'
-import { useAuth } from '@/components/auth-context'
 
 interface ProductDetailProps {
   product: {
@@ -54,7 +53,6 @@ const shippingDetails = shippingRates[product.category] || { fee: 'Affordable Sh
 const router = useRouter()
 const { addToCart } = useCart()
 const { isInWishlist, toggleWishlist } = useWishlist()
-const { user } = useAuth()
 const isWishlistedActual = isInWishlist(product._id)
 
 const handleAddToCart = () => {
@@ -65,7 +63,7 @@ const handleAddToCart = () => {
 
 const handleBuyNow = () => {
   addToCart({ id: product._id, name: product.name, price: product.price, image: images[0] }, quantity)
-  router.push(user ? '/checkout' : '/login?redirect=/checkout')
+  router.push('/checkout')
 }
 
 const handleToggleWishlist = () => {
