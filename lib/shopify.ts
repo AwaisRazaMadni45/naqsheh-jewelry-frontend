@@ -139,13 +139,24 @@ export function mapShopifyProduct(node: any) {
   const images: string[] = node.images?.edges?.map((e: any) => e.node.url) || []
   const tags: string[] = node.tags || []
 
+  // Agar productType "Earrings" hai lekin tag "jhumka" hai to category "Jhumka" ho
+  // Agar productType directly "Jhumka" set hai CSV mein to woh bhi kaam karega
+  const rawCategory = (node.productType || 'Uncategorized') as string
+  const hasJhumkaTag = tags.some(
+    (t) => t.toLowerCase() === 'jhumka' || t.toLowerCase() === 'jhumkay' || t.toLowerCase() === 'jhumke'
+  )
+  const category =
+    hasJhumkaTag || rawCategory.toLowerCase() === 'jhumka'
+      ? 'Jhumka'
+      : rawCategory
+
   return {
     _id: node.legacyResourceId as string,
     id: node.legacyResourceId as string,
     name: node.title as string,
     description: (node.description || '') as string,
     price: variant ? Number(variant.price) : 0,
-    category: (node.productType || 'Uncategorized') as string,
+    category: category,
     image: images,
     stock: (node.totalInventory ?? 0) as number,
     discount: 0,

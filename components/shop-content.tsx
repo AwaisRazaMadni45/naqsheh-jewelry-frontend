@@ -15,7 +15,7 @@ const priceRanges = [
   { label: 'Rs 2,000+', min: 2000, max: Infinity },
 ]
 
-const categories = ['All', 'Rings', 'Necklaces', 'Earrings', 'Watches', 'Hand Harness', 'Bracelets']
+const categories = ['All', 'Rings', 'Necklaces', 'Earrings', 'Jhumka', 'Watches', 'Hand Harness', 'Bracelets']
 const sortOptions = [
   { label: 'Featured', value: 'featured' },
   { label: 'Price: Low to High', value: 'price-asc' },
