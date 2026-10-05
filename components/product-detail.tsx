@@ -33,15 +33,7 @@ export function ProductDetail({ product, relatedProducts }: ProductDetailProps) 
   const rating = product.rating || 0
   const reviews = product.reviews || 0
   const sizes = product.sizes || []
-const shippingRates: Record<string, { fee: string; days: string }> = {
-  Rings: { fee: 'Free Shipping', days: '3-5 days' },
-  Necklaces: { fee: 'Free Shipping', days: '3-5 days' },
-  Earrings: { fee: 'Free Shipping', days: '2-4 days' },
-  Watches: { fee: 'Rs 200 Shipping', days: '5-7 days' },
-  'Hand Harness': { fee: 'Free Shipping', days: '3-5 days' },
-  Bracelets: { fee: 'Free Shipping', days: '3-5 days' },
-}
-const shippingDetails = shippingRates[product.category] || { fee: 'Affordable Shipping', days: '3-5 days' }
+const shippingDetails = { fee: 'Rs 250 Shipping', days: '3-5 days' }
   const [selectedImage, setSelectedImage] = useState(0)
   const [selectedSize, setSelectedSize] = useState(sizes[0] || '')
   const [quantity, setQuantity] = useState(1)

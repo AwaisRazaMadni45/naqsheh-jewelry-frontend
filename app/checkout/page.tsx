@@ -36,6 +36,8 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
+  const SHIPPING_CHARGE = 250
+  const grandTotal = totalPrice + SHIPPING_CHARGE
   const formatPrice = (p: number) => `Rs ${p.toLocaleString('en-PK')}`
 
   // Agar logged-in user hai to fields pre-fill karo
@@ -82,7 +84,7 @@ export default function CheckoutPage() {
           country: 'Pakistan',
           phone,
         },
-        totalPrice,
+        totalPrice: grandTotal,
         paymentMethod,
       }
 
@@ -329,7 +331,7 @@ export default function CheckoutPage() {
               ) : (
                 <>
                   <CheckCircle2 className="h-5 w-5" />
-                  Place Order — {formatPrice(totalPrice)}
+                  Place Order — {formatPrice(grandTotal)}
                 </>
               )}
             </button>
@@ -380,11 +382,11 @@ export default function CheckoutPage() {
                 </div>
                 <div className="flex justify-between text-sm text-muted-foreground">
                   <span>Shipping</span>
-                  <span className="text-green-600 font-medium">Free</span>
+                  <span className="font-medium">{formatPrice(SHIPPING_CHARGE)}</span>
                 </div>
                 <div className="flex justify-between font-semibold text-base pt-2 border-t border-border">
                   <span>Total</span>
-                  <span className="text-gold">{formatPrice(totalPrice)}</span>
+                  <span className="text-gold">{formatPrice(grandTotal)}</span>
                 </div>
               </div>
 
@@ -392,7 +394,7 @@ export default function CheckoutPage() {
               <div className="mt-5 pt-4 border-t border-border space-y-2">
                 {[
                   '✓  Cash on Delivery available',
-                  '✓  Free shipping on all orders',
+                  '✓  Shipping: Rs 250 (all Pakistan)',
                   '✓  7-day easy returns',
                   '✓  Genuine & certified products',
                 ].map((badge) => (
