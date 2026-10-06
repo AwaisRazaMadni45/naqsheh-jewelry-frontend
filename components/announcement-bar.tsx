@@ -35,7 +35,7 @@ export function AnnouncementBar() {
 
   return (
     <div
-      className="relative z-[60] bg-charcoal text-white text-xs sm:text-sm overflow-hidden"
+      className="sticky top-0 z-[60] bg-charcoal text-white text-xs sm:text-sm overflow-hidden"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={() => setPaused(true)}
