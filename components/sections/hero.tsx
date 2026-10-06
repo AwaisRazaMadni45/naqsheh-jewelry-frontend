@@ -25,8 +25,8 @@ export function HeroSection() {
           alt="NAQSHEH jewelry collection"
           className="w-full h-full object-contain object-center opacity-85"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/25" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/30 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-black/25" />
       </div>
 
       {/* ── Content ──
@@ -73,28 +73,11 @@ export function HeroSection() {
             {STORE.tagline}
           </motion.p>
 
-          {/* Offer pills */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.45 }}
-            className="flex flex-wrap gap-2 mb-5"
-          >
-            {['COD Available', 'Delivery Rs. 250', 'Free Gift on Rs. 1,000+'].map((pill) => (
-              <span
-                key={pill}
-                className="text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full border border-white/25 text-white/80 bg-white/10 backdrop-blur-sm"
-              >
-                {pill}
-              </span>
-            ))}
-          </motion.div>
-
           {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.55 }}
+            transition={{ duration: 0.6, delay: 0.45 }}
             className="flex flex-col sm:flex-row items-start sm:items-center gap-3"
           >
             <Link

@@ -1,7 +1,4 @@
 // ─── NAQSHEH Store Config ────────────────────────────────────────────────────
-// Sab kuch ek jagah. Koi bhi price, message ya link yahan se update karo —
-// poori website automatically update ho jaegi.
-
 export const STORE = {
   name: 'NAQSHEH',
   tagline: 'Elegant jewelry for every occasion, starting from Rs. 250.',
@@ -13,47 +10,33 @@ export const STORE = {
   // ─── Pricing & Offers ───────────────────────────────────────────────────
   startingPrice: 250,
   shippingCharge: 250,
-  freeShippingThreshold: 2000,
-  freeGiftThreshold: 1000,
+  freeShippingThreshold: 2500,
+  freeGiftThreshold: 1500,
 
-  // ─── Contact ────────────────────────────────────────────────────────────
-  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '923157726839',
-  whatsappDefaultMessage: 'Hi! I need help with an order.',
-  email: 'naqshehjewels@gmail.com',
-  phone: '+92 315 7726839',
-  address: 'Plot No 5, Rawalpindi, Pakistan',
-
-  // ─── Social ─────────────────────────────────────────────────────────────
-  instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || 'https://www.instagram.com/naqshehofficials/',
-  instagramHandle: '@naqshehofficials',
-  facebook: 'https://www.facebook.com/profile.php?id=61591472600822',
-  tiktok: 'https://www.tiktok.com/@naqsheh3',
-
-  // ─── Announcement Bar Messages ──────────────────────────────────────────
+  // ─── Announcement Bar — sirf 3 messages, har cheez ek baar ─────────────
   announcements: [
-    'Cash on Delivery Available All Over Pakistan',
-    'Delivery Rs. 250  |  Free Delivery on Orders Rs. 2,000+',
-    'Free Gift on Orders Rs. 1,000+  🎁',
+    'Cash on Delivery Available All Over Pakistan 🛵',
+    'Free Delivery on Rs. 2,500+  |  Free Gift on Rs. 1,500+ 🎁',
+    'Jewelry starting from Rs. 250 — Shop Now ✨',
   ],
 
-  // ─── Trust Strip (4 blocks under hero) ──────────────────────────────────
+  // ─── Trust Strip ────────────────────────────────────────────────────────
   trustItems: [
-    { icon: 'cod',     title: 'Cash on Delivery',         subtitle: 'Pay when order arrives' },
-    { icon: 'truck',   title: 'Delivery Rs. 250',          subtitle: 'Free above Rs. 2,000' },
-    { icon: 'gift',    title: 'Free Gift',                 subtitle: 'On orders Rs. 1,000+' },
-    { icon: 'whatsapp',title: 'WhatsApp Support',          subtitle: 'Chat with us anytime' },
+    { icon: 'cod',      title: 'Cash on Delivery',  subtitle: 'Pay when order arrives' },
+    { icon: 'truck',    title: 'Free Delivery',      subtitle: 'On orders Rs. 2,500+' },
+    { icon: 'gift',     title: 'Free Gift',           subtitle: 'On orders Rs. 1,500+' },
+    { icon: 'whatsapp', title: 'WhatsApp Support',   subtitle: 'Chat with us anytime' },
   ],
 
   // ─── Shop by Budget tiles ────────────────────────────────────────────────
   budgetTiles: [
-    { label: 'Under Rs. 500',   maxPrice: 500,     href: '/shop?maxPrice=500' },
-    { label: 'Under Rs. 1,000', maxPrice: 1000,    href: '/shop?maxPrice=1000' },
-    { label: 'Under Rs. 2,000', maxPrice: 2000,    href: '/shop?maxPrice=2000' },
-    { label: 'Premium',         maxPrice: 999999,  href: '/shop?minPrice=2000' },
+    { label: 'Under Rs. 500',   maxPrice: 500,    href: '/shop?maxPrice=500' },
+    { label: 'Under Rs. 1,000', maxPrice: 1000,   href: '/shop?maxPrice=1000' },
+    { label: 'Under Rs. 2,000', maxPrice: 2000,   href: '/shop?maxPrice=2000' },
+    { label: 'Premium',         maxPrice: 999999, href: '/shop?minPrice=2000' },
   ],
 
-  // ─── Featured Collection Banners ────────────────────────────────────────
-  // image: swap with Shopify collection image URL or /public path
+  // ─── Featured Collection Banners ─────────────────────────────────────────
   collectionBanners: [
     {
       title: 'Bridal Collection',
@@ -81,12 +64,24 @@ export const STORE = {
     },
   ],
 
-  // ─── Hero ───────────────────────────────────────────────────────────────
-  // Swap heroImage with any Shopify product/lifestyle URL
+  // ─── Hero image ─────────────────────────────────────────────────────────
   heroImage: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1600&h=900&fit=crop',
+
+  // ─── Contact ────────────────────────────────────────────────────────────
+  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '923157726839',
+  whatsappDefaultMessage: 'Hi! I need help with an order.',
+  email: 'naqshehjewels@gmail.com',
+  phone: '+92 315 7726839',
+  address: 'Plot No 5, Rawalpindi, Pakistan',
+
+  // ─── Social ─────────────────────────────────────────────────────────────
+  instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || 'https://www.instagram.com/naqshehofficials/',
+  instagramHandle: '@naqshehofficials',
+  facebook: 'https://www.facebook.com/profile.php?id=61591472600822',
+  tiktok: 'https://www.tiktok.com/@naqsheh3',
 
   // ─── SEO ────────────────────────────────────────────────────────────────
   seoTitle: 'NAQSHEH | Elegant Jewelry in Pakistan. Starting from Rs. 250. COD Available.',
   seoDescription:
-    'Shop elegant jewelry at NAQSHEH Pakistan. Rings, necklaces, earrings, bracelets & more. Starting from Rs. 250. Cash on delivery. Free delivery on Rs. 2,000+.',
+    'Shop elegant jewelry at NAQSHEH Pakistan. Rings, necklaces, earrings, bracelets & more. Starting from Rs. 250. Cash on delivery. Free delivery on Rs. 2,500+.',
 } as const
