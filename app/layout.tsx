@@ -2,6 +2,8 @@ import { CartProvider } from '@/components/cart-context'
 import { WishlistProvider } from '@/components/wishlist-context'
 import { AuthProvider } from '@/components/auth-context'
 import { WhatsAppFloat } from '@/components/whatsapp-float'
+import { AnnouncementBar } from '@/components/announcement-bar'
+import { MobileBottomNav } from '@/components/mobile-bottom-nav'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
@@ -15,10 +17,13 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://lunajewelry.com'),
-  title: 'NAQSHEH Jewelry | Timeless Luxury',
-  description: 'Timeless jewelry crafted for modern women. Discover our collection of rings, necklaces, earrings, and bracelets.',
+  metadataBase: new URL('https://naqsheh.pk'),
+  title: 'NAQSHEH | Elegant Jewelry in Pakistan. Starting from Rs. 250. COD Available.',
+  description:
+    'Shop elegant jewelry at NAQSHEH Pakistan. Rings, necklaces, earrings, bracelets & more. Starting from Rs. 250. Cash on delivery. Free delivery on Rs. 2,000+.',
   openGraph: {
+    title: 'NAQSHEH | Elegant Jewelry in Pakistan',
+    description: 'Rings, necklaces, earrings, bracelets & more. Starting from Rs. 250. COD available all over Pakistan.',
     images: [{ url: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1200&h=630&fit=crop' }],
   },
 }
@@ -54,10 +59,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <AuthProvider>
             <CartProvider>
               <WishlistProvider>
+                {/* Announcement bar — above everything */}
+                <AnnouncementBar />
                 <Navbar />
-                <main>{children}</main>
+                <main className="pb-14 sm:pb-0">{children}</main>
                 <Footer />
                 <WhatsAppFloat />
+                <MobileBottomNav />
                 <Toaster />
               </WishlistProvider>
             </CartProvider>

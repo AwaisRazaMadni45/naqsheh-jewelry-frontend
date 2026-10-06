@@ -15,7 +15,7 @@ export const testimonials = [
     name: 'Victoria Hamilton',
     role: 'Collector',
     image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
-    text: 'Luna Jewelry has completely redefined my expectations of luxury. The Celestial Diamond Ring is breathtakingly beautiful and the craftsmanship is impeccable.',
+    text: 'NAQSHEH has completely redefined my expectations. The quality is breathtakingly beautiful.',
     rating: 5,
   },
   {
@@ -68,7 +68,7 @@ export const faqs = [
   },
   {
     question: 'Can I customize a piece?',
-    answer: 'Absolutely. Our bespoke service allows you to work with our master jewelers to create a one-of-a-kind piece. Contact us to begin your custom journey.',
+    answer: 'We offer a customization option for select pieces. Contact us on WhatsApp to discuss your requirements.',
   },
   {
     question: 'How do I care for my jewelry?',

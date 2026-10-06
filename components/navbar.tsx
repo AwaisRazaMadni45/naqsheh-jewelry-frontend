@@ -224,16 +224,6 @@ export function Navbar() {
     </Link>
   )}
 </div>
-              {mounted && (
-                <button
-                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                  className={`p-2 rounded-full transition-colors ${
-                    isTransparent ? 'text-white/90 hover:text-white' : 'text-foreground/70 hover:text-foreground'
-                  }`}
-                >
-                  {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-                </button>
-              )}
             </div>
           </div>
         </div>
@@ -418,6 +408,19 @@ export function Navbar() {
       </Button>
     </Link>
   </div>
+
+  {/* Dark mode toggle — moved from header */}
+  {mounted && (
+    <button
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      className="flex items-center gap-3 w-full px-2 py-2 text-sm text-foreground/70 hover:text-foreground transition-colors"
+    >
+      {theme === 'dark'
+        ? <><Sun className="h-4 w-4" /> Switch to Light Mode</>
+        : <><Moon className="h-4 w-4" /> Switch to Dark Mode</>
+      }
+    </button>
+  )}
 </div>
             </div>
           </motion.div>

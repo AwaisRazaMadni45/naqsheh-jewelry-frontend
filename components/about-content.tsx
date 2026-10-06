@@ -11,7 +11,7 @@ export function AboutContent() {
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1589674781759-c21c37956a44?w=1920&h=1080&fit=crop&q=80"
-            alt="Our atelier"
+            alt="Our studio"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/50" />
@@ -27,8 +27,8 @@ export function AboutContent() {
               Our Story
             </span>
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-              Crafted with Passion,<br />
-              <span className="text-gold">Designed for Eternity</span>
+              Designed with Passion,<br />
+              <span className="text-gold">Made for Eternity</span>
             </h1>
             <p className="text-lg text-white/70 leading-relaxed">
               Since 2026, Naqsheh Jewelry has been launching extraordinary pieces that celebrate the moments that matter most in life.
@@ -55,10 +55,10 @@ export function AboutContent() {
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Founded in the heart of Rawalpindi, Naqsheh Jewelry began with a simple belief: that every woman deserves jewelry that tells her unique story. What started as a small atelier on Fifth Avenue has grown into a globally recognized luxury brand.
+                  Founded in the heart of Rawalpindi, Naqsheh Jewelry began with a simple belief: that every woman deserves jewelry that tells her unique story. What started as a small brand has grown into a recognized name across Pakistan.
                 </p>
                 <p>
-                  Our founder, Jaweria Basharat, brought together master jewelers from around the world to create pieces that blend traditional craftsmanship with modern design. Each piece is a testament to our unwavering commitment to excellence.
+                  Our founder, Jaweria Basharat, curated a collection of pieces that blend traditional Pakistani aesthetics with modern design sensibilities. Each piece is a testament to our unwavering commitment to elegance and quality.
                 </p>
                 <p>
                   Today, Naqsheh continues to push the boundaries of jewelry design, creating collections that are both timeless and contemporary. We source only the finest materials and work with ethical suppliers to ensure every piece meets our exacting standards.
@@ -74,7 +74,7 @@ export function AboutContent() {
             >
               <img
                 src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=800&h=1000&fit=crop"
-                alt="Jewelry craftsmanship"
+                alt="Jewelry design"
                 className="w-full h-[500px] lg:h-[600px] object-cover rounded-lg"
               />
               <div className="absolute -bottom-6 -left-6 bg-card border border-border p-6 rounded-lg shadow-lg max-w-xs">
@@ -103,9 +103,9 @@ export function AboutContent() {
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {[
-              { icon: Gem, title: 'Ethical Sourcing', desc: 'We partner with responsible mines and suppliers who share our commitment to environmental and social standards.' },
-              { icon: Award, title: 'Uncompromising Quality', desc: 'Every piece undergoes rigorous inspection by certified gemologists to ensure it meets our exacting standards.' },
-              { icon: Heart, title: 'Handcrafted with Love', desc: 'Our master artisans bring decades of experience to every piece, infusing each creation with passion and precision.' },
+              { icon: Gem, title: 'Ethical Sourcing', desc: 'We partner with responsible suppliers who share our commitment to quality and fair practices.' },
+              { icon: Award, title: 'Uncompromising Quality', desc: 'Every piece undergoes rigorous inspection to ensure it meets our exacting standards before reaching you.' },
+              { icon: Heart, title: 'Designed with Love', desc: 'Our team brings years of experience to every piece, infusing each creation with passion and precision.' },
               { icon: Users, title: 'Community First', desc: 'We believe in giving back. A portion of every sale supports women education and empowerment programs.' },
             ].map((item, index) => (
               <motion.div
@@ -140,7 +140,7 @@ export function AboutContent() {
             >
               <img
                 src="https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=800&h=1000&fit=crop"
-                alt="Craftsmanship"
+                alt="Design process"
                 className="w-full h-[500px] lg:h-[600px] object-cover rounded-lg"
               />
             </motion.div>
@@ -152,30 +152,30 @@ export function AboutContent() {
               className="order-1 lg:order-2"
             >
               <span className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-4 block">
-                Craftsmanship
+                Our Design Process
               </span>
               <h2 className="font-serif text-3xl lg:text-4xl text-foreground mb-6">
-                The Art of Fine Jewelry
+                The Art of Elegant Jewelry
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Each Naqsheh piece is born from a meticulous process that can take hundreds of hours. From the initial sketch to the final polish, every step is guided by master artisans who have dedicated their lives to the art of jewelry making.
+                  Each Naqsheh piece goes through a meticulous design and quality process. From the initial concept to the final finish, every step is guided by our commitment to delivering something truly special.
                 </p>
                 <p>
-                  We combine centuries-old techniques with cutting-edge technology. Our state-of-the-art atelier features both traditional hand tools and modern laser engraving systems, allowing us to achieve precision that was once unimaginable.
+                  We combine timeless design principles with modern production techniques to achieve the precision and elegance our customers love.
                 </p>
                 <p>
-                  Our gemologists personally select each stone, evaluating cut, color, clarity, and carat weight with uncompromising standards. Only stones that meet our exceptional criteria are set into Naqsheh pieces.
+                  Our team personally inspects every piece against strict quality criteria. Only items that meet our standards reach our customers.
                 </p>
               </div>
               <div className="grid grid-cols-3 gap-6 mt-8">
                 <div className="text-center">
                   <p className="font-serif text-3xl text-gold">200+</p>
-                  <p className="text-xs text-muted-foreground mt-1">Hours per piece</p>
+                  <p className="text-xs text-muted-foreground mt-1">Products available</p>
                 </div>
                 <div className="text-center">
-                  <p className="font-serif text-3xl text-gold">50+</p>
-                  <p className="text-xs text-muted-foreground mt-1">Master artisans</p>
+                  <p className="font-serif text-3xl text-gold">Rs. 250</p>
+                  <p className="text-xs text-muted-foreground mt-1">Starting price</p>
                 </div>
                 <div className="text-center">
                   <p className="font-serif text-3xl text-gold">12</p>

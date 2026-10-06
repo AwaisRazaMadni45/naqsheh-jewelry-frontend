@@ -16,16 +16,16 @@ const footerLinks = {
   company: [
     { name: 'About Us', href: '/about' },
     { name: 'Our Story', href: '/about' },
-    { name: 'Craftsmanship', href: '/about' },
+    { name: 'Our Collection', href: '/shop' },
     // { name: 'Careers', href: '#' },
     // { name: 'Press', href: '#' },
   ],
   support: [
     { name: 'Contact Us', href: '/contact' },
     { name: 'FAQs', href: '/contact' },
-    // { name: 'Shipping', href: '#' },
-    // { name: 'Returns', href: '#' },
-    // { name: 'Size Guide', href: '#' },
+    { name: 'Shipping Policy', href: '/terms-of-service' },
+    { name: 'Returns & Exchange', href: '/terms-of-service' },
+    { name: 'Privacy Policy', href: '/privacy-policy' },
   ],
 }
 
@@ -63,7 +63,7 @@ function TikTokIcon({ className }: { className?: string }) {
           <div className="max-w-xl mx-auto text-center">
             <h3 className="font-serif text-2xl lg:text-3xl text-white mb-3">Join the Inner Circle</h3>
             <p className="text-sm text-white/60 mb-8">
-              Subscribe to receive exclusive offers, early access to new collections, and insider stories from our atelier.
+              Subscribe to receive exclusive offers, early access to new collections, and the latest updates from NAQSHEH.
             </p>
             <form onSubmit={handleSubscribe} className="flex gap-3">
   <input
@@ -87,7 +87,23 @@ function TikTokIcon({ className }: { className?: string }) {
     {message}
   </p>
 )}
+          </div>
+        </div>
 
+        {/* Delivery / Offer info strip */}
+        <div className="py-5 border-b border-white/10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+            {[
+              { label: 'Cash on Delivery', sub: 'Available all over Pakistan' },
+              { label: 'Delivery Rs. 250', sub: 'Free on orders Rs. 2,000+' },
+              { label: 'Free Gift 🎁', sub: 'On orders Rs. 1,000+' },
+              { label: '7-Day Returns', sub: 'Easy exchange policy' },
+            ].map((item) => (
+              <div key={item.label}>
+                <p className="text-sm font-semibold text-white/90">{item.label}</p>
+                <p className="text-xs text-white/50 mt-0.5">{item.sub}</p>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -96,7 +112,7 @@ function TikTokIcon({ className }: { className?: string }) {
           <div className="col-span-2 md:col-span-1">
             <h4 className="font-serif text-xl text-white mb-6">NAQSHEH</h4>
             <p className="text-sm text-white/50 leading-relaxed mb-6">
-              Timeless jewelry crafted for modern women. Each piece is designed with passion and precision in our atelier.
+              Elegant jewelry for every occasion. Starting from Rs. 250, with Cash on Delivery all over Pakistan.
             </p>
             <div className="flex gap-4">
               <a href="https://www.instagram.com/naqshehofficials/" className="text-white/50 hover:text-gold transition-colors">

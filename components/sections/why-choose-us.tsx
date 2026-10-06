@@ -7,7 +7,7 @@ const features = [
   {
     icon: Shield,
     title: 'Premium Quality',
-    description: 'Every piece is handcrafted with the finest materials and inspected by certified gemologists.',
+    description: 'Every piece is carefully selected and quality-checked to ensure it meets our exacting standards.',
   },
   {
     icon: Truck,
