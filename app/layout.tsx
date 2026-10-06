@@ -62,7 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {/* Announcement bar — above everything */}
                 <AnnouncementBar />
                 <Navbar />
-                <main className="pb-14 sm:pb-0">{children}</main>
+                <main className="pb-12 sm:pb-0">{children}</main>
                 <Footer />
                 <WhatsAppFloat />
                 <MobileBottomNav />

@@ -32,7 +32,7 @@ export function WhatsAppFloat({ productName, productUrl }: WhatsAppFloatProps) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-50 flex items-center gap-2 bg-green-600 text-white rounded-full shadow-lg hover:bg-green-700 hover:scale-105 active:scale-95 transition-all duration-300 overflow-hidden"
+      className="fixed bottom-16 sm:bottom-6 right-4 sm:right-6 z-50 flex items-center gap-2 bg-green-600 text-white rounded-full shadow-lg hover:bg-green-700 hover:scale-105 active:scale-95 transition-all duration-300 overflow-hidden"
       style={{ height: 52 }}
     >
       {/* WhatsApp SVG icon */}

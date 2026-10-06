@@ -5,41 +5,42 @@ import Link from 'next/link'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { STORE } from '@/config/store'
 
-// Announcement bar height = 36px (h-9)
-// Navbar height mobile = 64px (h-16)
-// Total offset = 100px → pt-[100px]
-// Hero should NOT be full screen — make it compact so trust strip is visible without scrolling
+// Layout heights:
+// Announcement bar  = 36px  (h-9,  sticky top-0)
+// Navbar mobile     = 64px  (h-16, fixed top-9)
+// Total fixed UI    = 100px
+// We use pt-[100px] so content starts right after navbar — same gap as image 2 (red circle)
 
 export function HeroSection() {
   return (
-    <section className="relative flex items-center overflow-hidden"
-      // Mobile: slightly less than full viewport so trust strip peeks below
-      // Desktop: comfortable height
-      style={{ minHeight: 'calc(100svh - 36px - 20px)', maxHeight: 720 }}
+    <section
+      className="relative flex flex-col justify-start overflow-hidden"
+      // Height = viewport minus announcement bar so NO black gap at bottom (green circle fix)
+      // auto height, not min-h-screen, so section ends right after content
     >
-      {/* ── Background image — naqsheh logo, contain so it's not stretched ── */}
+      {/* ── Background image ── */}
       <div className="absolute inset-0 bg-[#1a1008]">
-        {/* Mobile: logo centered, not stretched */}
         <img
           src="/images/naqsheh-logo.jpeg"
           alt="NAQSHEH jewelry collection"
-          className="w-full h-full object-contain object-center opacity-80"
+          className="w-full h-full object-cover object-center opacity-85"
         />
-        {/* Gradient overlays for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/50" />
       </div>
 
-      {/* ── Content — pushed down below navbar + announcement bar ── */}
-      {/* pt accounts for: announcement bar (36px) + navbar (64px) = 100px */}
-      <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 w-full pt-[100px] pb-8">
+      {/* ── Content ──
+          pt-[100px]  = announcement (36) + navbar (64) — same visual gap as image 2 red circle
+          pb-12       = breathing room at bottom before scroll arrow
+      ── */}
+      <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 w-full pt-[100px] pb-12">
         <div className="max-w-xl">
 
-          {/* Badge */}
+          {/* EST. badge — directly under navbar, same as image 2 */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
             <span className="inline-flex items-center gap-2 text-[10px] sm:text-xs font-bold tracking-[0.25em] uppercase text-white/70 mb-3">
               <span className="h-px w-6 bg-gold/60 inline-block" />
@@ -50,9 +51,9 @@ export function HeroSection() {
 
           {/* Heading */}
           <motion.h1
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.25 }}
+            transition={{ duration: 0.65, delay: 0.2 }}
             className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-[1.15] mb-3"
           >
             Timeless Jewelry
@@ -64,19 +65,19 @@ export function HeroSection() {
 
           {/* Tagline */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="text-sm sm:text-base text-white/75 mb-5 max-w-sm leading-relaxed"
+            transition={{ duration: 0.6, delay: 0.35 }}
+            className="text-sm sm:text-base text-white/75 mb-4 max-w-sm leading-relaxed"
           >
             {STORE.tagline}
           </motion.p>
 
           {/* Offer pills */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
             className="flex flex-wrap gap-2 mb-5"
           >
             {['COD Available', 'Delivery Rs. 250', 'Free Gift on Rs. 1,000+'].map((pill) => (
@@ -91,9 +92,9 @@ export function HeroSection() {
 
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.55 }}
             className="flex flex-col sm:flex-row items-start sm:items-center gap-3"
           >
             <Link
@@ -113,12 +114,12 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll arrow */}
+      {/* Scroll arrow — tight to content, no extra space */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.4 }}
-        className="absolute bottom-4 left-1/2 -translate-x-1/2"
+        transition={{ delay: 1.2 }}
+        className="relative z-10 flex justify-center pb-4"
         aria-hidden="true"
       >
         <motion.div
@@ -126,7 +127,7 @@ export function HeroSection() {
           transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
           className="flex flex-col items-center gap-1"
         >
-          <span className="block w-px h-5 bg-white/30" />
+          <span className="block w-px h-4 bg-white/30" />
           <ChevronDown className="h-4 w-4 text-white/50" />
         </motion.div>
       </motion.div>
