@@ -23,7 +23,7 @@ export function HeroSection() {
         <img
           src="/images/naqsheh-logo.jpeg"
           alt="NAQSHEH jewelry collection"
-          className="w-full h-full object-cover object-center opacity-85"
+          className="w-full h-full object-contain object-center opacity-85"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/25" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/50" />
