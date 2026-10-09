@@ -20,7 +20,18 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://naqsheh.pk'),
   title: 'NAQSHEH | Elegant Jewelry in Pakistan. Starting from Rs. 250. COD Available.',
   description:
-    'Shop elegant jewelry at NAQSHEH Pakistan. Rings, necklaces, earrings, bracelets & more. Starting from Rs. 250. Cash on delivery. Free delivery on Rs. 2,000+.',
+    'Shop elegant jewelry at NAQSHEH Pakistan. Rings, necklaces, earrings, bracelets & more. Starting from Rs. 250. Cash on delivery. Free delivery on Rs. 2,500+.',
+  icons: {
+    icon: [
+      { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon/favicon-96x96.png', type: 'image/png', sizes: '96x96' },
+      { url: '/favicon/favicon.ico', type: 'image/x-icon' },
+    ],
+    apple: [
+      { url: '/favicon/apple-touch-icon.png', sizes: '180x180' },
+    ],
+    shortcut: '/favicon/favicon.ico',
+  },
   openGraph: {
     title: 'NAQSHEH | Elegant Jewelry in Pakistan',
     description: 'Rings, necklaces, earrings, bracelets & more. Starting from Rs. 250. COD available all over Pakistan.',
