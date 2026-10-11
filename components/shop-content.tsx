@@ -15,7 +15,15 @@ const priceRanges = [
   { label: 'Rs 2,000+', min: 2000, max: Infinity },
 ]
 
-const categories = ['All', 'Rings', 'Necklaces', 'Earrings', 'Jhumka', 'Watches', 'Hand Harness', 'Bracelets']
+const categories = ['All', 'Rings', 'Necklaces', 'Earrings', 'Watches', 'Hand Harness', 'Bracelets']
+
+// Earrings ki sub-categories — tag se automatically filter hoti hain
+const earringSubCategories = [
+  { label: 'All Earrings', value: null },
+  { label: 'Hoops',        value: 'Hoops' },
+  { label: 'Studs',        value: 'Studs' },
+  { label: 'Jhumka',       value: 'Jhumka' },
+]
 const sortOptions = [
   { label: 'Featured', value: 'featured' },
   { label: 'Price: Low to High', value: 'price-asc' },
@@ -31,6 +39,7 @@ export function ShopContent() {
   const [viewMode, setViewMode] = useState<'grid' | 'compact'>('grid')
   const [sortBy, setSortBy] = useState('featured')
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'All')
+  const [selectedEarringType, setSelectedEarringType] = useState<string | null>(null)
   const [selectedPriceRange, setSelectedPriceRange] = useState<string | null>(null)
   const [showNewOnly, setShowNewOnly] = useState(searchParams.get('new') === 'true')
   const [currentPage, setCurrentPage] = useState(1)
@@ -49,6 +58,7 @@ export function ShopContent() {
 
   useEffect(() => {
     setSelectedCategory(searchParams.get('category') || 'All')
+    setSelectedEarringType(null) // category change par sub-filter reset
   }, [searchParams])
 
   const filteredProducts = useMemo(() => {
@@ -65,6 +75,11 @@ export function ShopContent() {
 
     if (selectedCategory !== 'All') {
       result = result.filter((p) => p.category === selectedCategory)
+    }
+
+    // Earrings sub-category filter (Hoops / Studs / Jhumka)
+    if (selectedCategory === 'Earrings' && selectedEarringType) {
+      result = result.filter((p) => p.earringType === selectedEarringType)
     }
 
     if (selectedPriceRange) {
@@ -94,7 +109,7 @@ export function ShopContent() {
     }
 
     return result
-  }, [products, selectedCategory, selectedPriceRange, showNewOnly, sortBy, searchParams])
+  }, [products, selectedCategory, selectedEarringType, selectedPriceRange, showNewOnly, sortBy, searchParams])
 
   useEffect(() => {
     setCurrentPage(1)
@@ -114,6 +129,7 @@ export function ShopContent() {
 
   const clearFilters = useCallback(() => {
     setSelectedCategory('All')
+    setSelectedEarringType(null)
     setSelectedPriceRange(null)
     setShowNewOnly(false)
     router.push('/shop')
@@ -232,6 +248,35 @@ export function ShopContent() {
               <button onClick={clearFilters} className="text-xs text-gold hover:underline ml-2">
                 Clear all
               </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Earrings Sub-Category Strip */}
+      <AnimatePresence>
+        {selectedCategory === 'Earrings' && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="border-b border-border bg-muted/30"
+          >
+            <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-2 flex-wrap">
+              <span className="text-xs text-muted-foreground font-medium mr-1">Style:</span>
+              {earringSubCategories.map((sub) => (
+                <button
+                  key={sub.label}
+                  onClick={() => setSelectedEarringType(sub.value)}
+                  className={`text-xs px-4 py-1.5 rounded-full border transition-all duration-200 font-medium ${
+                    selectedEarringType === sub.value
+                      ? 'bg-gold text-white border-gold'
+                      : 'border-border text-muted-foreground hover:border-gold hover:text-gold bg-background'
+                  }`}
+                >
+                  {sub.label}
+                </button>
+              ))}
             </div>
           </motion.div>
         )}
@@ -377,7 +422,10 @@ export function ShopContent() {
                           type="radio"
                           name="mobile-category"
                           checked={selectedCategory === cat}
-                          onChange={() => setSelectedCategory(cat)}
+                          onChange={() => {
+                            setSelectedCategory(cat)
+                            setSelectedEarringType(null)
+                          }}
                           className="accent-gold h-4 w-4"
                         />
                         <span className="text-sm">{cat}</span>
@@ -385,6 +433,28 @@ export function ShopContent() {
                     ))}
                   </div>
                 </div>
+
+                {/* Earrings sub-filter — sirf tab dikhao */}
+                {selectedCategory === 'Earrings' && (
+                  <div>
+                    <h3 className="text-xs font-bold tracking-widest uppercase text-muted-foreground mb-4">Earring Style</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {earringSubCategories.map((sub) => (
+                        <button
+                          key={sub.label}
+                          onClick={() => setSelectedEarringType(sub.value)}
+                          className={`text-xs px-4 py-1.5 rounded-full border transition-all font-medium ${
+                            selectedEarringType === sub.value
+                              ? 'bg-gold text-white border-gold'
+                              : 'border-border text-muted-foreground'
+                          }`}
+                        >
+                          {sub.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* Price */}
                 <div>

@@ -147,8 +147,22 @@ export function mapShopifyProduct(node: any) {
   )
   const category =
     hasJhumkaTag || rawCategory.toLowerCase() === 'jhumka'
-      ? 'Jhumka'
+      ? 'Earrings'  // Jhumka ab Earrings ki sub-category hai
       : rawCategory
+
+  // Earrings sub-type — tag se automatically detect hota hai
+  // Shopify mein product ka tag: hoops / studs / jhumka / jhumkay / jhumke
+  const earringType = (() => {
+    if (!['earrings', 'jhumka'].includes((rawCategory || '').toLowerCase()) &&
+        !tags.some(t => ['hoops', 'studs', 'jhumka', 'jhumkay', 'jhumke'].includes(t.toLowerCase()))) {
+      return null
+    }
+    if (tags.some(t => t.toLowerCase() === 'hoops' || t.toLowerCase() === 'hoop')) return 'Hoops'
+    if (tags.some(t => t.toLowerCase() === 'studs' || t.toLowerCase() === 'stud')) return 'Studs'
+    if (tags.some(t => ['jhumka', 'jhumkay', 'jhumke'].includes(t.toLowerCase()))) return 'Jhumka'
+    if (hasJhumkaTag) return 'Jhumka'
+    return null
+  })()
 
   return {
     _id: node.legacyResourceId as string,
@@ -157,6 +171,7 @@ export function mapShopifyProduct(node: any) {
     description: (node.description || '') as string,
     price: variant ? Number(variant.price) : 0,
     category: category,
+    earringType: earringType,   // 'Hoops' | 'Studs' | 'Jhumka' | null
     image: images,
     stock: (node.totalInventory ?? 0) as number,
     discount: 0,
